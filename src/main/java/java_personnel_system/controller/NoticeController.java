@@ -14,7 +14,7 @@ public class NoticeController {
     public static void noticeSelectViewController(String key) throws Exception {
         switch (key) {
             case "1":
-                NoticeService.selectAllNotice();
+                MainView.selectAllNoticeView();
                 if (MainView.currentUser.getUserAuthority()==0){
                     ManagerView.noticeView();
                 }
@@ -36,11 +36,11 @@ public class NoticeController {
     public static void noticeLikeSelectController(String key) throws Exception {
         switch (key) {
             case "1":
-                NoticeService.selectNoticeName();
+                MainView.selectNoticeNameView();
                 ManagerView.noticeView();
                 break;
             case "2":
-                NoticeService.selectNoticeContent();
+                MainView.selectNoticeContentView();
                 ManagerView.noticeView();
                 break;
             default:

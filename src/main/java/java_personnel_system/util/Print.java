@@ -14,7 +14,7 @@ public class Print {
         for (int i = 0; i < c.length; i++) {
             System.out.print(c[i]);
             try {
-                Thread.sleep(80);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -57,12 +57,12 @@ public class Print {
     public static void staffAllMsgPrint(int staffid, String staffName, String staffSex, String staffDepartment, String staffPosition,
                                         String staffNation,String staffEducation,String staffIdentity,String staffPhonenum) {
         print("员工id：" + staffid + " 员工姓名：" + staffName + " 员工性别：" + staffSex +
-                " 员工部门：" + staffDepartment + " 员工职位：" + staffPosition + " 民族:" + staffNation
+                " 员工部门id：" + staffDepartment + " 员工职位id：" + staffPosition + " 民族:" + staffNation
                 + " 教育背景：" + staffEducation + " 身份证号：" + staffIdentity + " 手机号:" + staffPhonenum);
     }
 
     public static void noticeAllMsgPrint(int noticeId,String noticeContent,String noticePublicher,String noticeName) {
-        print("公告名：" + noticeId + " 公告内容：" + noticeContent + " 公告发布者：" + noticePublicher
+        print("公告名：" + noticeId + " 公告内容：" + noticeContent + " 公告发布者id：" + noticePublicher
                 + " 公告名:" + noticeName);
     }
 }

@@ -2,6 +2,7 @@ package java_personnel_system.controller;
 
 import java_personnel_system.util.Print;
 import java_personnel_system.view.MainView;
+import java_personnel_system.view.PersonnelView;
 
 /**
  * @auther Rachel
@@ -13,15 +14,19 @@ public class PersonnelController {
         switch (key){
             case "1":
                 MainView.adminUserView();
+                PersonnelView.personnelView();
                 break;
             case "2":
                 MainView.staffView();
+                PersonnelView.personnelView();
                 break;
             case "3":
                 MainView.noticeSelectView();
+                PersonnelView.personnelView();
                 break;
             default:
                 Print.print("输入有误");
+                PersonnelView.personnelView();
         }
     }
 }

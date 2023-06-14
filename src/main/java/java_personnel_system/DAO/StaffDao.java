@@ -118,6 +118,62 @@ public interface StaffDao {
      */
     void autoUpdateStaffDepartmentId(int staffId) throws Exception;
 
+    /**根据员工id更改员工姓名
+     * @param staffId 要更改的员工的员工id
+     * @param staffName 更改后的员工姓名
+     * @throws Exception 抛出异常
+     */
+    void updateStaffName(int staffId,String staffName)throws Exception;
+
+    /**根据员工id更改员工性别
+     * @param staffId 要更改的员工的员工id
+     * @param staffSex 更改后的员工性别
+     * @throws Exception 抛出异常
+     */
+    void updateStaffSex(int staffId,String staffSex)throws Exception;
+
+    /**根据员工id更改员工部门id
+     * @param staffId 要更改的员工的员工id
+     * @param sdepartmentId 更改后的员工部门id
+     * @throws Exception 抛出异常
+     */
+    void updateStaffDepartmentId(int staffId,int sdepartmentId)throws Exception;
+
+    /**根据员工id更改员工职位id
+     * @param staffId 要更改的员工的员工id
+     * @param spositionId 更改后的员工职位id
+     * @throws Exception 抛出异常
+     */
+    void updateStaffPositionId(int staffId,int spositionId)throws Exception;
+
+    /**根据员工id更改员工民族
+     * @param staffId 要更改的员工的员工id
+     * @param staffNation 更改后的员工民族
+     * @throws Exception 抛出异常
+     */
+    void updateStaffNation(int staffId,String staffNation)throws Exception;
+
+    /**根据员工id更改员工学历
+     * @param staffId 要更改的员工的员工id
+     * @param staffEducation 更改后的员工学历
+     * @throws Exception 抛出异常
+     */
+    void updateStaffEducation(int staffId,String staffEducation)throws Exception;
+
+    /**根据员工id更改员工身份证
+     * @param staffId 要更改的员工的员工id
+     * @param staffIdentityId 更改后的员工身份证
+     * @throws Exception 抛出异常
+     */
+    void updateStaffIdentityid(int staffId,String staffIdentityId)throws Exception;
+
+    /**根据员工id更改员工电话号
+     * @param staffId  要更改的员工的员工id
+     * @param staffPhonenum 更改后的员工电话号
+     * @throws Exception 抛出异常
+     */
+    void updateStaffPhonenum(int staffId,String staffPhonenum)throws Exception;
+
     /**
      * 根据输入的员工id 更新员工信息
      *

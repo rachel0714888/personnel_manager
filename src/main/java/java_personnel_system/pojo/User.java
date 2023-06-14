@@ -45,4 +45,9 @@ public class User {
         this.userStaffId = userStaffId;
         this.userAuthority = userAuthority;
     }
+
+    public User(String userName, String userPassword) {
+        this.userName = userName;
+        this.userPassword = userPassword;
+    }
 }

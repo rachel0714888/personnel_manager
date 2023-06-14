@@ -57,7 +57,7 @@ public class PositionDaoimpl implements PositionDao {
     public void removePositionName(String positionName) throws Exception {
         synchronized (o){
             Connection c = MainView.cp.getConnection();
-            String sql = "delete from position_table where position_name = ?";
+            String sql = "delete from position_table where position_name like concat('%',?,'%')";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, positionName);
             ps.execute();

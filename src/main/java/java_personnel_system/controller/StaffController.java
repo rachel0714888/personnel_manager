@@ -16,24 +16,15 @@ public class StaffController {
     public static void staffController(String key) throws Exception {
         switch (key) {
             case "1":
-                StaffService.addStaff();
-                Print.print("正在增加员工...");
-                Thread.sleep(3000);
-                Print.print("员工增加成功");
+                MainView.staffAddView();
                 MainView.staffView();
                 break;
             case "2":
                 MainView.staffRemoveView();
-                Print.print("正在删除员工...");
-                Thread.sleep(3000);
-                Print.print("员工删除成功");
                 MainView.staffView();
                 break;
             case "3":
-                StaffService.updateStaffMsg();
-                Print.print("正在更新员工信息...");
-                Thread.sleep(3000);
-                Print.print("员工信息更新成功");
+                MainView.updateStaffView();
                 MainView.staffView();
                 break;
             case "4":
@@ -60,10 +51,10 @@ public class StaffController {
     public static void staffRemoveController(String key) throws Exception {
         switch (key) {
             case "1":
-                StaffService.removeStaffId();
+                MainView.removeStaffIdView();
                 break;
             case "2":
-                StaffService.removeStaffName();
+                MainView.removeStaffNameView();
                 break;
             case "3":
                 MainView.staffView();
@@ -71,6 +62,50 @@ public class StaffController {
             default:
                 Print.print("输入有误，请重新输入");
                 MainView.staffRemoveView();
+        }
+    }
+
+    public static void staffUpdateController(String key)throws Exception{
+        switch (key) {
+            case "1":
+                MainView.updateStaffNameView();
+                MainView.staffView();
+                break;
+            case "2":
+                MainView.updateStaffSexView();
+                MainView.staffView();
+                break;
+            case "3":
+                MainView.updateStaffDepartmentIdView();
+                MainView.staffView();
+                break;
+            case "4":
+                MainView.updateStaffPositionIdView();
+                MainView.staffView();
+                break;
+            case "5":
+                MainView.updateStaffNationView();
+                MainView.staffView();
+                break;
+            case "6":
+                MainView.updateStaffEducationView();
+                MainView.staffView();
+                break;
+            case "7":
+                MainView.updateStaffIdentityidView();
+                MainView.staffView();
+                break;
+            case "8":
+                MainView.updateStaffPhonenumView();
+                MainView.staffView();
+                break;
+            case "9":
+                MainView.updateStaffMsgView();
+                MainView.staffView();
+                break;
+            default:
+                Print.print("输入有误，请重新输入");
+                MainView.updateStaffView();
         }
     }
 
@@ -96,44 +131,44 @@ public class StaffController {
     public static void staffLikeSelectController(String key) throws Exception {
         switch (key) {
             case "1":
-                StaffService.selectStaffId();
+                MainView.selectStaffIdView();
                 MainView.staffView();
                 break;
             case "2":
-                StaffService.selectStaffName();
+                MainView.selectStaffNameView();
                 MainView.staffView();
                 break;
             case "3":
-                StaffService.selectStaffSex();
+                MainView.selectStaffSexView();
                 MainView.staffView();
                 break;
             case "4":
-                StaffService.selectStaffDepartmentId();
+                MainView.selectStaffDepartmentIdView();
                 MainView.staffView();
                 break;
             case "5":
-                StaffService.selectStaffPrositionId();
+                MainView.selectStaffPrositionIdView();
                 MainView.staffView();
                 break;
             case "6":
-                StaffService.selectStaffNation();
+                MainView.selectStaffNationView();
                 MainView.staffView();
                 break;
             case "7":
-                StaffService.selectStaffEducation();
+                MainView.selectStaffEducationView();
                 MainView.staffView();
                 break;
             case "8":
-                StaffService.selectStaffIdentityId();
+                MainView.selectStaffIdentityIdView();
                 MainView.staffView();
                 break;
             case "9":
-                StaffService.selectStaffPhonenum();
+                MainView.selectStaffPhonenumView();
                 MainView.staffView();
                 break;
             default:
                 Print.print("输入有误，请重新输入");
-                MainView.staffSelectView();
+                MainView.staffLikeSelectView();
         }
     }
 }

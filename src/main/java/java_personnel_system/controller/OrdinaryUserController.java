@@ -18,9 +18,11 @@ public class OrdinaryUserController {
         switch (key){
             case "1":
                 OrdinaryUserView.userView();
+                OrdinaryUserView.ordinaryUserView();
                 break;
             case "2":
                 OrdinaryUserView.staffView();
+                OrdinaryUserView.ordinaryUserView();
                 break;
             case "3":
                 MainView.noticeSelectView();
@@ -36,14 +38,11 @@ public class OrdinaryUserController {
         switch (key){
             case "1":
                 Print.ordinaryUserMsgPrint(MainView.currentUser);
-                OrdinaryUserView.ordinaryUserView();
+                OrdinaryUserView.userView();
                 break;
             case "2":
-                UserService.ordinaryUserMsgUpdate();
-                Print.print("正在为您修改信息...");
-                Thread.sleep(3000);
-                Print.print("信息修改完毕");
-                OrdinaryUserView.ordinaryUserView();
+                OrdinaryUserView.userChangeView();
+                OrdinaryUserView.userView();
                 break;
             default:
                 Print.print("输入有误");
@@ -58,15 +57,40 @@ public class OrdinaryUserController {
                 OrdinaryUserView.ordinaryUserView();
                 break;
             case "2":
-                StaffService.ordinaryUserUpdateStaffMsg();
-                Print.print("正在为您修改信息...");
-                Thread.sleep(3000);
-                Print.print("信息修改完毕");
+                OrdinaryUserView.ordinaryUserUpdateStaffMsgView();
                 OrdinaryUserView.ordinaryUserView();
                 break;
             default:
                 Print.print("输入有误");
                 OrdinaryUserView.staffView();
+        }
+    }
+
+    public static void staffUpdateController(String key)throws Exception {
+        switch (key) {
+            case "1":
+                MainView.updateStaffNameView();
+                OrdinaryUserView.staffView();
+                break;
+            case "2":
+                MainView.updateStaffSexView();
+                OrdinaryUserView.staffView();
+                break;
+            case "3":
+                MainView.updateStaffNationView();
+                OrdinaryUserView.staffView();
+                break;
+            case "4":
+                MainView.updateStaffIdentityidView();
+                OrdinaryUserView.staffView();
+                break;
+            case "5":
+                MainView.updateStaffPhonenumView();
+                OrdinaryUserView.staffView();
+                break;
+            default:
+                Print.print("输入有误，请重新输入");
+                OrdinaryUserView.updateStaffView();
         }
     }
 }

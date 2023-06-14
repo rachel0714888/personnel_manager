@@ -50,29 +50,20 @@ public class ManagerController {
     public static void departmentController(String key) throws Exception {
         switch (key) {
             case "1":
-                DepartmentService.addDepartment();
-                Print.print("正在添加部门...");
-                Thread.sleep(3000);
-                Print.print("部门添加成功");
-                ManagerView.managerView();
+                ManagerView.addDepartmentView();
+                ManagerView.managerDepartmentView();
                 break;
             case "2":
                 ManagerView.departmentRemoveView();
-                Print.print("正在删除部门...");
-                Thread.sleep(3000);
-                Print.print("部门删除成功");
-                ManagerView.managerView();
+                ManagerView.managerDepartmentView();
                 break;
             case "3":
-                DepartmentService.changeDepartmentMsg();
-                Print.print("正在更新部门信息...");
-                Thread.sleep(3000);
-                Print.print("部门信息更新成功");
-                ManagerView.managerView();
+                ManagerView.changeDepartmentMsgView();
+                ManagerView.managerDepartmentView();
                 break;
             case "4":
                 ManagerView.departmentSelectView();
-                ManagerView.managerView();
+                ManagerView.managerDepartmentView();
                 break;
             case "5":
                 ManagerView.managerView();
@@ -86,10 +77,12 @@ public class ManagerController {
     public static void departmentRemoveController(String key) throws Exception {
         switch (key) {
             case "1":
-                DepartmentService.removeDepartmentId();
+                ManagerView.removeDepartmentIdView();
+                ManagerView.managerDepartmentView();
                 break;
             case "2":
-                DepartmentService.removeDepartmentName();
+                ManagerView.removeDepartmentNameView();
+                ManagerView.managerDepartmentView();
                 break;
             default:
                 Print.print("输入有误，请重新输入");
@@ -100,14 +93,16 @@ public class ManagerController {
     public static void departmentSelectController(String key) throws Exception {
         switch (key) {
             case "1":
-                DepartmentService.selectAllDepartmentMsg();
+                ManagerView.selectAllDepartmentMsgView();
+                ManagerView.managerDepartmentView();
                 break;
             case "2":
-                DepartmentService.selectLikeDepartmentName();
+                ManagerView.selectLikeDepartmentNameView();
+                ManagerView.managerDepartmentView();
                 break;
             default:
                 Print.print("输入有误，请重新输入");
-                ManagerView.managerDepartmentView();
+                ManagerView.departmentSelectView();
         }
     }
 
@@ -115,31 +110,22 @@ public class ManagerController {
         switch (key) {
             case "1":
                 //在职位页面选择1——添加职位 进入职位服务
-                PositionService.addPosition();
-                Print.print("正在添加职位...");
-                Thread.sleep(3000);
-                Print.print("职位添加成功");
-                ManagerView.managerView();
+                ManagerView.addPositionView();
+                ManagerView.positionView();
                 break;
             case "2":
                 //在职位页面选择2——删除职位 进入职位删除页面
                 ManagerView.positionRemoveView();
-                Print.print("正在删除职位...");
-                Thread.sleep(3000);
-                Print.print("职位删除成功");
-                ManagerView.managerView();
+                ManagerView.positionView();
                 break;
             case "3":
                 //在职位页面选择3——修改职位 进入职位服务
-                PositionService.changePositionMsg();
-                Print.print("正在更改职位...");
-                Thread.sleep(3000);
-                Print.print("职位更改成功");
-                ManagerView.managerView();
+                ManagerView.changePositionMsgView();
+                ManagerView.positionView();
                 break;
             case "4":
-
-                ManagerView.managerView();
+                ManagerView.positionSelectView();
+                ManagerView.positionView();
                 break;
             case "5":
                 ManagerView.managerView();
@@ -153,10 +139,12 @@ public class ManagerController {
     public static void positionRemoveController(String key) throws Exception {
         switch (key) {
             case "1":
-                PositionService.removePositionId();
+                ManagerView.removePositionIdView();
+                ManagerView.positionView();
                 break;
             case "2":
-                PositionService.removePositionName();
+                ManagerView.removePositionNameView();
+                ManagerView.positionView();
                 break;
             default:
                 Print.print("输入有误，请重新输入");
@@ -167,38 +155,31 @@ public class ManagerController {
     public static void positionSelectController(String key) throws Exception {
         switch (key) {
             case "1":
-                PositionService.selectAllPositionMsg();
+                ManagerView.selectAllPositionMsgView();
+                ManagerView.positionView();
                 break;
             case "2":
-                PositionService.selectLikePositionName();
+                ManagerView.selectLikePositionNameView();
+                ManagerView.positionView();
                 break;
             default:
                 Print.print("输入有误，请重新输入");
-                ManagerView.positionView();
+                ManagerView.positionSelectView();
         }
     }
 
     public static void noticeController(String key) throws Exception {
         switch (key) {
             case "1":
-                NoticeService.addNotice();
-                Print.print("正在添加公告...");
-                Thread.sleep(3000);
-                Print.print("公告添加成功");
+                ManagerView.addNoticeView();
                 ManagerView.noticeView();
                 break;
             case "2":
-                NoticeService.removeNotice();
-                Print.print("正在删除公告...");
-                Thread.sleep(3000);
-                Print.print("公告删除成功");
+                ManagerView.removeNoticeView();
                 ManagerView.noticeView();
                 break;
             case "3":
-                NoticeService.updateNotice();
-                Print.print("正在更改公告...");
-                Thread.sleep(3000);
-                Print.print("公告更改成功");
+                ManagerView.updateNoticeView();
                 ManagerView.noticeView();
                 break;
             case "4":
@@ -207,7 +188,7 @@ public class ManagerController {
                 break;
             default:
                 Print.print("输入有误，请重新输入");
-                ManagerView.managerView();
+                ManagerView.noticeView();
         }
     }
 

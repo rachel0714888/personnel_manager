@@ -57,7 +57,7 @@ public class DepartmentDaoimpl implements DepartmentDao {
     public void removeDepartmentName(String departmentName) throws Exception {
         synchronized (o) {
             Connection c = MainView.cp.getConnection();
-            String sql = "delete from department_table where department_name = ?";
+            String sql = "delete from department_table where department_name like concat('%',?,'%')";
             PreparedStatement ps = c.prepareStatement(sql);
             ps.setString(1, departmentName);
             ps.execute();
@@ -262,8 +262,6 @@ public class DepartmentDaoimpl implements DepartmentDao {
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     return true;
-                } else {
-                    Print.print("部门不存在");
                 }
                 MainView.cp.returnConnection(c);
             } else {

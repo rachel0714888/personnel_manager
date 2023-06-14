@@ -17,7 +17,7 @@ public class PersonnelView {
         Print.print("1.用户模块");
         Print.print("2.员工模块");
         Print.print("3.公告模块");
-        String inputKey = sc.nextLine();
+        String inputKey = sc.next();
         PersonnelController.personnelController(inputKey);
     }
 }

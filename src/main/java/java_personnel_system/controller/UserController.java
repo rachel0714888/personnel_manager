@@ -16,28 +16,20 @@ public class UserController {
     public static void userController(String key) throws Exception {
         switch (key) {
             case "1":
-                UserService.userAdd();
-                Print.print("正在为您添加用户...");
-                Thread.sleep(3000);
-                Print.print("用户添加成功");
+                MainView.userAddView();
                 MainView.adminUserView();
                 break;
             case "2":
                 MainView.userRemoveView();
-                Print.print("正在为您删除用户...");
-                Thread.sleep(3000);
-                Print.print("用户删除成功");
                 MainView.adminUserView();
                 break;
             case "3":
-                UserService.userChange();
-                Print.print("正在为您修改用户信息...");
-                Thread.sleep(3000);
-                Print.print("用户信息修改成功");
+                MainView.userChangeView();
                 MainView.adminUserView();
                 break;
             case "4":
-                MainView.userSelectView();
+                MainView.userAllSelectView();
+                MainView.adminUserView();
                 break;
             case "5":
                 if (MainView.currentUser.getUserAuthority() == 0) {
@@ -53,10 +45,38 @@ public class UserController {
         }
     }
 
+    public static void userChangeController(String key) throws Exception {
+        switch (key) {
+            case "1":
+                MainView.changeUserNameView();
+                MainView.adminUserView();
+                break;
+            case "2":
+                MainView.changeUserPasswordView();
+                MainView.adminUserView();
+                break;
+            case "3":
+                MainView.changeUserStaffidView();
+                MainView.adminUserView();
+                break;
+            case "4":
+                MainView.changeUserIsOnworkView();
+                MainView.adminUserView();
+                break;
+            case "5":
+                MainView.changeUserAuthorityView();
+                MainView.adminUserView();
+                break;
+            default:
+                Print.print("输入有误，请重新输入");
+                MainView.userChangeView();
+        }
+    }
+
     public static void userSelectController(String key) throws Exception {
         switch (key) {
             case "1":
-                UserService.userAllSelect();
+                MainView.userAllSelectView();
                 MainView.adminUserView();
                 break;
             case "2":
@@ -75,10 +95,12 @@ public class UserController {
     public static void userLikeSelectController(String key) throws Exception {
         switch (key) {
             case "1":
-                UserService.userLikeNameSelect();
+                MainView.userLikeNameSelectView();
+                MainView.adminUserView();
                 break;
             case "2":
-                UserService.userLikeIsOnworkSelect();
+                MainView.userLikeIsOnworkSelectView();
+                MainView.adminUserView();
                 break;
             default:
                 Print.print("输入有误，请重新输入");
@@ -89,16 +111,20 @@ public class UserController {
     public static void userRemoveController(String key) throws Exception {
         switch (key) {
             case "1":
-                UserService.userIdRemove();
+                MainView.userIdRemoveView();
+                MainView.adminUserView();
                 break;
             case "2":
-                UserService.userNameRemove();
+                MainView.userNameRemoveView();
+                MainView.adminUserView();
                 break;
             case "3":
-                UserService.userStaffIdRemove();
+                MainView.userStaffIdRemoveView();
+                MainView.adminUserView();
                 break;
             case "4":
-                UserService.userIsWorkRemove();
+                MainView.userIsworkRemoveView();
+                MainView.adminUserView();
                 break;
             case "5":
                 MainView.adminUserView();
@@ -108,7 +134,6 @@ public class UserController {
                 MainView.userRemoveView();
         }
     }
-
 
 
 }

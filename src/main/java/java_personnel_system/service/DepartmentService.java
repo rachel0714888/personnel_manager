@@ -6,6 +6,7 @@ import java_personnel_system.DAO.StaffDao;
 import java_personnel_system.DAO.StaffDaoimpl;
 import java_personnel_system.pojo.Department;
 import java_personnel_system.util.Print;
+import java_personnel_system.view.ManagerView;
 
 import java.util.Scanner;
 
@@ -14,90 +15,79 @@ import java.util.Scanner;
  * @date 2023/6/12 1:24
  */
 public class DepartmentService {
-    private static Scanner sc = new Scanner(System.in);
     private static DepartmentDao departmentDao = new DepartmentDaoimpl();
     private static StaffDao staffDao = new StaffDaoimpl();
 
-    public static void addDepartment() throws Exception {
-        Print.print("请输入要增加的部门名");
-        String departmentName = sc.nextLine();
+    public static void addDepartment(String departmentName) throws Exception {
         if (departmentDao.departmentExist(departmentName)){
             Print.print("部门已存在，请重新输入");
-            addDepartment();
+            ManagerView.addDepartmentView();
         }
         departmentDao.addDepartment(new Department(departmentName));
     }
 
-    public static void removeDepartmentId() throws Exception{
-        Print.print("请输入要删除的部门id");
-        int departmentId = sc.nextInt();
+    public static void removeDepartmentId(int departmentId,int confirm) throws Exception{
         if (!departmentDao.departmentExist(departmentId)){
             Print.print("部门不存在，请重新输入");
-            removeDepartmentId();
+            ManagerView.removeDepartmentIdView();
         }
         if (departmentDao.isdepartmentIdHaveStaff(departmentId)){
-            Print.print("该部门还有员工，请确认是否删除");
-            Print.print("1.是");
-            Print.print("2.否");
-            int confirm = sc.nextInt();
             if (confirm==1){
                 staffDao.autoUpdateStaffDepartmentId(departmentId);
                 departmentDao.removeDepartmentId(departmentId);
                 departmentDao.departmentAlter();
             }
+            if (confirm == 2){
+            }
+            else {
+                Print.print("输入有误，重新输入");
+                ManagerView.removeDepartmentIdView();
+            }
         }
     }
 
-    public static void removeDepartmentName() throws Exception{
-        Print.print("请输入要删除的部门名");
-        String departmentName = sc.next();
+    public static void removeDepartmentName(String departmentName,int confirm) throws Exception{
         if (!departmentDao.departmentExist(departmentName)){
             Print.print("部门不存在，请重新输入");
-            removeDepartmentName();
+            ManagerView.removeDepartmentNameView();
         }
         if (departmentDao.isdepartmentNameHaveStaff(departmentName)){
-            Print.print("该部门还有员工，请确认是否删除");
-            Print.print("1.是");
-            Print.print("2.否");
-            int confirm = sc.nextInt();
             if (confirm==1){
                 staffDao.autoUpdateStaffDepartmentId(departmentDao.selectLikeDepartmentNameNoPrint(departmentName));
                 departmentDao.removeDepartmentName(departmentName);
                 departmentDao.departmentAlter();
             }
+            if (confirm==2){
+            }
+            else {
+                Print.print("输入有误，重新输入");
+                ManagerView.removeDepartmentNameView();
+            }
         }
     }
 
-    public static void changeDepartmentMsg() throws Exception{
-        Print.print("请输入要修改的部门id");
-        int departmentId = sc.nextInt();
+    public static void changeDepartmentMsg(int departmentId,String departmentName) throws Exception{
         if (!departmentDao.departmentExist(departmentId)){
             Print.print("部门不存在，请重新输入");
-            changeDepartmentMsg();
+            ManagerView.changeDepartmentMsgView();
         }
-        Print.print("请输入修改后的部门名");
-        String departmentName = sc.next();
+        if (departmentDao.departmentExist(departmentName)){
+            Print.print("部门已存在，请重新输入");
+            ManagerView.changeDepartmentMsgView();
+        }
         departmentDao.changeDepartmentName(new Department(departmentId,departmentName));
     }
 
     public static void selectAllDepartmentMsg() throws Exception{
-        Print.print("正在查询部门信息...");
-        Thread.sleep(3000);
         departmentDao.selectAllDepartment();
-        Print.print("部门信息查询成功");
     }
 
-    public static void selectLikeDepartmentName() throws Exception{
-        Print.print("请输入要查询的部门名");
-        String departmentName = sc.nextLine();
+    public static void selectLikeDepartmentName(String departmentName) throws Exception{
         if (!departmentDao.departmentExist(departmentName)){
             Print.print("部门不存在，请重新输入");
-            selectLikeDepartmentName();
+            ManagerView.selectLikeDepartmentNameView();
         }
-        Print.print("正在查询部门信息...");
-        Thread.sleep(3000);
         departmentDao.selectLikeDepartmentName(departmentName);
-        Print.print("部门信息查询成功");
     }
 
 }

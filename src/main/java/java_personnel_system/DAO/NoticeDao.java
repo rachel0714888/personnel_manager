@@ -33,6 +33,7 @@ public interface NoticeDao {
      */
     void updateNotice(Notice notice) throws Exception;
 
+
     /**
      * 查询所有公告
      *

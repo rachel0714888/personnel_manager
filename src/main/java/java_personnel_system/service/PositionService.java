@@ -7,6 +7,8 @@ import java_personnel_system.DAO.StaffDaoimpl;
 import java_personnel_system.pojo.Department;
 import java_personnel_system.pojo.Position;
 import java_personnel_system.util.Print;
+import java_personnel_system.view.MainView;
+import java_personnel_system.view.ManagerView;
 
 import java.util.Scanner;
 
@@ -15,73 +17,76 @@ import java.util.Scanner;
  * @date 2023/6/12 9:15
  */
 public class PositionService {
-    private static Scanner sc = new Scanner(System.in);
     private static PositionDao positionDao = new PositionDaoimpl();
     private static StaffDao staffDao = new StaffDaoimpl();
 
-    public static void addPosition() throws Exception {
-        Print.print("请输入要增加的职位名");
-        String positionName = sc.nextLine();
+    public static void addPosition(String positionName) throws Exception {
         if (positionDao.positionExist(positionName)){
-            Print.print("职位已存在，请重新输入");
-            addPosition();
+            Print.print("职位已存在");
+            ManagerView.positionView();
         }
         positionDao.addPosition(new Position(positionName));
     }
 
-    public static void removePositionId() throws Exception {
-        Print.print("请输入要删除的职位id");
-        int positionId = sc.nextInt();
+    public static void removePositionId(int positionId,int confirm) throws Exception {
         if (!positionDao.positionIdExist(positionId)){
-            Print.print("职位不存在，请重新输入");
-            removePositionId();
+            Print.print("职位不存在");
+            ManagerView.positionView();
         }
-        staffDao.autoUpdateStaffPositionId(positionId);
-        positionDao.removePositionId(positionId);
-        positionDao.positionAlter();
+        if (confirm==1){
+            staffDao.autoUpdateStaffPositionId(positionId);
+            positionDao.removePositionId(positionId);
+            positionDao.positionAlter();
+        }
+        else if (confirm==2){
+            ManagerView.positionView();
+        }
+        else {
+            Print.print("输入有误，将为您返回职位界面");
+            ManagerView.positionView();
+        }
     }
 
-    public static void removePositionName() throws Exception {
-        Print.print("请输入要删除的职位名");
-        String positionName = sc.nextLine();
+    public static void removePositionName(String positionName,int confirm) throws Exception {
         if (!positionDao.positionExist(positionName)){
-            Print.print("职位不存在，请重新输入");
-            addPosition();
+            Print.print("职位不存在");
+            ManagerView.positionView();
         }
-        staffDao.autoUpdateStaffPositionId(positionDao.selectLikePositionNameNoPrint(positionName));
-        positionDao.removePositionName(positionName);
-        positionDao.positionAlter();
+        if (confirm==1){
+            staffDao.autoUpdateStaffPositionId(positionDao.selectLikePositionNameNoPrint(positionName));
+            positionDao.removePositionName(positionName);
+            positionDao.positionAlter();
+        }
+        else if (confirm==2){
+            ManagerView.positionView();
+        }
+        else {
+            Print.print("输入有误，将为您返回职位界面");
+            ManagerView.positionView();
+        }
     }
 
-    public static void changePositionMsg() throws Exception {
-        Print.print("请输入要修改的职位id");
-        int positionId = sc.nextInt();
+    public static void changePositionMsg(int positionId,String positionName) throws Exception {
         if (!positionDao.positionIdExist(positionId)){
-            Print.print("职位不存在，请重新输入");
-            changePositionMsg();
+            Print.print("职位不存在");
+            ManagerView.positionView();
         }
-        Print.print("请输入修改后的职位名");
-        String positionName = sc.next();
+        if (positionDao.positionExist(positionName)){
+            Print.print("该职位已存在");
+            ManagerView.positionView();
+        }
         positionDao.changePositionMsg(new Position(positionId, positionName));
     }
 
     public static void selectAllPositionMsg() throws Exception {
-        Print.print("正在查询职位信息...");
-        Thread.sleep(3000);
         positionDao.selectAllPositionMsg();
-        Print.print("职位信息查询成功");
     }
 
-    public static void selectLikePositionName() throws Exception {
-        Print.print("请输入要查询的职位名");
-        String positionName = sc.nextLine();
+    public static void selectLikePositionName(String positionName) throws Exception {
         if (!positionDao.positionExist(positionName)){
-            Print.print("职位不存在，请重新输入");
-            selectLikePositionName();
+            Print.print("职位不存在");
+            ManagerView.positionSelectView();
         }
-        Print.print("正在查询职位信息...");
-        Thread.sleep(3000);
         positionDao.selectLikePositionName(positionName);
-        Print.print("职位信息查询成功");
     }
 }

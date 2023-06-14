@@ -16,6 +16,41 @@ public interface UserDao {
      */
     int match(User inputUser) throws Exception;
 
+    /**根据输入的用户id修改对应的用户名
+     * @param userId 要改数据的用户id
+     * @param userName 修改后的用户名
+     * @throws Exception 抛出异常
+     */
+    void userNameChange(int userId,String userName) throws Exception;
+
+    /**根据输入的用户id修改对应的密码
+     * @param userId 要改数据的用户id
+     * @param userPassword 修改后的密码
+     * @throws Exception 抛出异常
+     */
+    void userPasswordChange(int userId,String userPassword) throws Exception;
+
+    /**根据输入的用户id修改对应的员工id
+     * @param userId 要改数据的用户id
+     * @param userStaffid 修改后的员工id
+     * @throws Exception 抛出异常
+     */
+    void userStaffidChange(int userId,int userStaffid) throws Exception;
+
+    /**根据输入的用户id修改对应的员工状态
+     * @param userId 要改数据的用户id
+     * @param userIswork 修改后的员工状态
+     * @throws Exception 抛出异常
+     */
+    void userIsOnworkChange(int userId,int userIswork)throws Exception;
+
+    /**根据输入的用户id修改对应的员工权限
+     * @param userId 要改数据的用户id
+     * @param authority 修改后的员工权限
+     * @throws Exception 抛出异常
+     */
+    void changeUserAuthority(int userId,int authority) throws Exception;
+
     /**
      * 插入一条用户数据
      *
@@ -60,6 +95,15 @@ public interface UserDao {
     boolean userStaffIdExist(int inputStaffId) throws Exception;
 
     /**
+     * 判断输入的用户的状态是否存在
+     *
+     * @param inputIswork 存放要判断的员工状态
+     * @return 存在返回true 反之返回false
+     * @throws Exception 抛出异常 如果出现SQLException，抛出异常
+     */
+    boolean userIsworkExist(int inputIswork) throws Exception;
+
+    /**
      * 防止手动删除数据后出现主键自增不连续
      *
      * @throws Exception 抛出异常 如果出现SQLException，抛出异常
@@ -89,15 +133,6 @@ public interface UserDao {
      * @throws Exception 抛出异常 如果出现SQLException，抛出异常
      */
     void isWorkRemove(int isWork) throws Exception;
-
-    /**
-     * 根据用户id修改用户信息
-     *
-     * @param user 存放要修改的用户id和修改后的用户信息
-     * @throws Exception 抛出异常 如果出现SQLException，抛出异常
-     */
-    void userChange(User user) throws Exception;
-
 
     /**普通用户只能根据自己的id对自己的用户名/密码进行修改
      * @param userName 修改后的用户名

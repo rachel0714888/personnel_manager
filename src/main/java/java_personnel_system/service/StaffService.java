@@ -3,6 +3,7 @@ package java_personnel_system.service;
 import java_personnel_system.DAO.StaffDao;
 import java_personnel_system.DAO.StaffDaoimpl;
 import java_personnel_system.pojo.Staff;
+import java_personnel_system.pojo.User;
 import java_personnel_system.util.Print;
 import java_personnel_system.view.MainView;
 
@@ -13,224 +14,192 @@ import java.util.Scanner;
  * @date 2023/6/12 10:20
  */
 public class StaffService {
-    private static Scanner sc = new Scanner(System.in);
     private static StaffDao staffDao = new StaffDaoimpl();
 
-    public synchronized static void addStaff() throws Exception {
-        Print.print("请输入您想要添加的员工姓名：");
-        String staffName = sc.next();
-        Print.print("请输入您想要添加的员工性别：");
-        String staffSex = sc.next();
-        Print.print("请输入您想要添加的员工的部门id：");
-        int sdepartmentId = sc.nextInt();
-        Print.print("请输入您想要添加的员工的职位id：");
-        int spositionId = sc.nextInt();
-        Print.print("请输入您想要添加的员工的民族：");
-        String staffNation = sc.next();
-        Print.print("请输入您想要添加的员工的学历：");
-        String staffEducation = sc.next();
-        Print.print("请输入您想要添加的员工的身份证：");
-        String staffIdentityId = sc.next();
-        if (staffDao.staffIdentityIdNameExist(staffIdentityId)) {
+    public synchronized static void addStaff(Staff staff) throws Exception {
+        if (staffDao.staffIdentityIdNameExist(staff.getStaffIdentityId())) {
             Print.print("员工已存在");
-            MainView.staffView();
+            MainView.staffAddView();
         }
-        Print.print("请输入您想要添加的员工的电话号码：");
-        String staffPhonenum = sc.next();
-        if (staffDao.staffPhoneNumNameExist(staffPhonenum)) {
+        if (staffDao.staffPhoneNumNameExist(staff.getStaffPhonenum())) {
             Print.print("员工已存在");
-            MainView.staffView();
+            MainView.staffAddView();
         }
-        staffDao.staffAdd(new Staff(staffName, staffSex, sdepartmentId, spositionId, staffNation, staffEducation, staffIdentityId, staffPhonenum));
+        staffDao.staffAdd(staff);
     }
 
-    public synchronized static void removeStaffId() throws Exception {
-        Print.print("请输入您想要删除的员工id：");
-        int staffId = sc.nextInt();
+    public synchronized static void removeStaffId(int staffId) throws Exception {
         if (!staffDao.staffIdExist(staffId)){
             Print.print("员工不存在");
-            removeStaffId();
+            MainView.removeStaffIdView();
         }
         staffDao.removeStaffId(staffId);
         staffDao.tableAlter();
     }
 
-    public synchronized static void removeStaffName() throws Exception {
-        Print.print("请输入您想要删除的员工姓名：");
-        String staffName = sc.next();
+    public synchronized static void removeStaffName(String staffName) throws Exception {
         if (!staffDao.staffNameExist(staffName)){
             Print.print("员工不存在");
-            removeStaffName();
+            MainView.removeStaffNameView();
         }
         staffDao.removeStaffName(staffName);
         staffDao.tableAlter();
     }
 
-    public static void updateStaffMsg() throws Exception {
-        Print.print("请输入您想要修改的员工的员工id");
-        int staffId = sc.nextInt();
+    public static void updateStaffName(int staffId,String staffName)throws Exception{
         if (!staffDao.staffIdExist(staffId)){
             Print.print("员工不存在");
-            updateStaffMsg();
+            MainView.removeStaffNameView();
         }
-        Print.print("请输入您修改后的员工姓名：");
-        String staffName = sc.next();
-        Print.print("请输入您修改后的员工性别：");
-        String staffSex = sc.next();
-        Print.print("请输入您修改后的员工的部门id：");
-        int sdepartmentId = sc.nextInt();
-        Print.print("请输入您修改后的员工的职位id：");
-        int spositionId = sc.nextInt();
-        Print.print("请输入您修改后的员工的民族：");
-        String staffNation = sc.next();
-        Print.print("请输入您修改后的员工的学历：");
-        String staffEducation = sc.next();
-        Print.print("请输入您修改后的员工的身份证：");
-        String staffIdentityId = sc.next();
-        Print.print("请输入您修改后的员工的电话号码：");
-        String staffPhonenum = sc.next();
-        staffDao.updateStaffMsg(new Staff(staffId, staffName, staffSex, sdepartmentId, spositionId, staffNation, staffEducation, staffIdentityId, staffPhonenum));
+        staffDao.updateStaffName(staffId,staffName);
     }
 
-    public static void ordinaryUserUpdateStaffMsg() throws Exception {
-        Print.print("请输入您修改后的员工姓名：");
-        String staffName = sc.next();
-        Print.print("请输入您修改后的员工的身份证：");
-        String staffIdentityId = sc.next();
-        Print.print("请输入您修改后的员工的电话号码：");
-        String staffPhonenum = sc.next();
+    public static void updateStaffSex(int staffId,String staffSex)throws Exception{
+        if (!staffDao.staffIdExist(staffId)){
+            Print.print("员工不存在");
+            MainView.removeStaffNameView();
+        }
+        staffDao.updateStaffSex(staffId,staffSex);
+    }
+
+    public static void updateStaffDepartmentId(int staffId,int sdepartmentId)throws Exception{
+        if (!staffDao.staffIdExist(staffId)){
+            Print.print("员工不存在");
+            MainView.removeStaffNameView();
+        }
+        staffDao.updateStaffDepartmentId(staffId,sdepartmentId);
+    }
+
+    public static void updateStaffPositionId(int staffId,int spositionId)throws Exception{
+        if (!staffDao.staffIdExist(staffId)){
+            Print.print("员工不存在");
+            MainView.removeStaffNameView();
+        }
+        staffDao.updateStaffPositionId(staffId,spositionId);
+    }
+
+    public static void updateStaffNation(int staffId,String staffNation)throws Exception{
+        if (!staffDao.staffIdExist(staffId)){
+            Print.print("员工不存在");
+            MainView.removeStaffNameView();
+        }
+        staffDao.updateStaffNation(staffId,staffNation);
+    }
+
+    public static void updateStaffEducation(int staffId,String staffEducation)throws Exception{
+        if (!staffDao.staffIdExist(staffId)){
+            Print.print("员工不存在");
+            MainView.removeStaffNameView();
+        }
+        staffDao.updateStaffEducation(staffId,staffEducation);
+    }
+
+    public static void updateStaffIdentityid(int staffId,String staffIdentityId)throws Exception{
+        if (!staffDao.staffIdExist(staffId)){
+            Print.print("员工不存在");
+            MainView.removeStaffNameView();
+        }
+        staffDao.updateStaffIdentityid(staffId,staffIdentityId);
+    }
+
+    public static void updateStaffPhonenum(int staffId,String staffPhonenum)throws Exception{
+        if (!staffDao.staffIdExist(staffId)){
+            Print.print("员工不存在");
+            MainView.removeStaffNameView();
+        }
+        staffDao.updateStaffPhonenum(staffId,staffPhonenum);
+    }
+
+    public static void updateStaffMsg(Staff staff) throws Exception {
+        if (!staffDao.staffIdExist(staff.getStaffId())){
+            Print.print("员工不存在");
+            MainView.removeStaffNameView();
+        }
+        staffDao.updateStaffMsg(staff);
+    }
+
+    public static void ordinaryUserUpdateStaffMsg(String staffName,String staffIdentityId,String staffPhonenum) throws Exception {
         staffDao.ordinaryUserUpdateStaffMsg(staffName,staffIdentityId,staffPhonenum);
     }
 
     public static void selectAllStaffMsg() throws Exception {
-        Print.print("正在查询员工信息...");
-        Thread.sleep(3000);
         staffDao.selectAllStaffMsg();
-        Print.print("员工信息查询完毕");
     }
 
-    public static void selectStaffId() throws Exception {
-        Print.print("请输入您想要查询的员工的员工id");
-        int staffId = sc.nextInt();
+    public static void selectStaffId(int staffId) throws Exception {
         if (!staffDao.staffIdExist(staffId)){
             Print.print("员工不存在");
-            selectStaffId();
+            MainView.staffLikeSelectView();
         }
-        Print.print("正在查询员工信息...");
-        Thread.sleep(3000);
         staffDao.selectStaffId(staffId);
-        Print.print("员工信息查询完毕");
     }
 
     public static void selectStaffIdNoInput(int staffId) throws Exception {
-        Print.print("正在查询员工信息...");
-        Thread.sleep(3000);
         staffDao.selectStaffId(staffId);
-        Print.print("员工信息查询完毕");
     }
 
-    public static void selectStaffName() throws Exception {
-        Print.print("请输入您要查询的员工姓名：");
-        String staffName = sc.next();
+    public static void selectStaffName(String staffName) throws Exception {
         if (!staffDao.staffNameExist(staffName)){
             Print.print("员工不存在");
-            selectStaffName();
+            MainView.staffLikeSelectView();
         }
-        Print.print("正在查询员工信息...");
-        Thread.sleep(3000);
         staffDao.selectStaffName(staffName);
-        Print.print("员工信息查询完毕");
     }
 
-    public static void selectStaffSex() throws Exception {
-        Print.print("请输入您要查询的员工性别：");
-        String staffSex = sc.next();
+    public static void selectStaffSex(String staffSex) throws Exception {
         if (!staffDao.staffSexExist(staffSex)){
             Print.print("员工不存在");
-            selectStaffSex();
+            MainView.staffLikeSelectView();
         }
-        Print.print("正在查询员工信息...");
-        Thread.sleep(3000);
         staffDao.selectStaffSex(staffSex);
-        Print.print("员工信息查询完毕");
     }
 
-    public static void selectStaffDepartmentId() throws Exception {
-        Print.print("请输入您要查询的员工的部门id：");
-        int sdepartmentId = sc.nextInt();
+    public static void selectStaffDepartmentId(int sdepartmentId) throws Exception {
         if (!staffDao.staffDepartmentIdExist(sdepartmentId)){
             Print.print("员工不存在");
-            selectStaffDepartmentId();
+            MainView.staffLikeSelectView();
         }
-        Print.print("正在查询员工信息...");
-        Thread.sleep(3000);
         staffDao.selectStaffDepartmentId(sdepartmentId);
-        Print.print("员工信息查询完毕");
     }
 
-    public static void selectStaffPrositionId() throws Exception {
-        Print.print("请输入您要查询的员工的职位id：");
-        int spositionId = sc.nextInt();
+    public static void selectStaffPrositionId(int spositionId) throws Exception {
         if (!staffDao.staffPositionIdExist(spositionId)){
             Print.print("员工不存在");
-            selectStaffPrositionId();
+            MainView.staffLikeSelectView();
         }
-        Print.print("正在查询员工信息...");
-        Thread.sleep(3000);
         staffDao.selectStaffPrositionId(spositionId);
-        Print.print("员工信息查询完毕");
     }
 
-    public static void selectStaffNation() throws Exception {
-        Print.print("请输入您要查询的员工的民族：");
-        String staffNation = sc.next();
+    public static void selectStaffNation(String staffNation) throws Exception {
         if (!staffDao.staffNationNameExist(staffNation)){
             Print.print("员工不存在");
-            selectStaffNation();
+            MainView.staffLikeSelectView();
         }
-        Print.print("正在查询员工信息...");
-        Thread.sleep(3000);
         staffDao.selectStaffNation(staffNation);
-        Print.print("员工信息查询完毕");
     }
 
-    public static void selectStaffEducation() throws Exception {
-        Print.print("请输入您要查询的员工的学历：");
-        String staffEducation = sc.next();
+    public static void selectStaffEducation(String staffEducation) throws Exception {
         if (!staffDao.staffEducationNameExist(staffEducation)){
             Print.print("员工不存在");
-            selectStaffEducation();
+            MainView.staffLikeSelectView();
         }
-        Print.print("正在查询员工信息...");
-        Thread.sleep(3000);
         staffDao.selectStaffEducation(staffEducation);
-        Print.print("员工信息查询完毕");
     }
 
-    public static void selectStaffIdentityId() throws Exception {
-        Print.print("请输入您要查询的员工的身份证：");
-        String staffIdentityId = sc.next();
+    public static void selectStaffIdentityId(String staffIdentityId) throws Exception {
         if (!staffDao.staffIdentityIdNameExist(staffIdentityId)){
             Print.print("员工不存在");
-            selectStaffIdentityId();
+            MainView.staffLikeSelectView();
         }
-        Print.print("正在查询员工信息...");
-        Thread.sleep(3000);
         staffDao.selectStaffIdentityId(staffIdentityId);
-        Print.print("员工信息查询完毕");
     }
 
-    public static void selectStaffPhonenum() throws Exception {
-        Print.print("请输入您要查询的员工的电话号码：");
-        String staffPhonenum = sc.next();
+    public static void selectStaffPhonenum(String staffPhonenum) throws Exception {
         if (!staffDao.staffPhoneNumNameExist(staffPhonenum)){
             Print.print("员工不存在");
-            selectStaffPhonenum();
+            MainView.staffLikeSelectView();
         }
-        Print.print("正在查询员工信息...");
-        Thread.sleep(3000);
         staffDao.selectStaffPhonenum(staffPhonenum);
-        Print.print("员工信息查询完毕");
     }
 
 }
